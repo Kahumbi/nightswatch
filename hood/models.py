@@ -20,3 +20,33 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
     
+class Business(models.Model):
+    image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    description = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    location = models.CharField(max_length=250)
+    # neighborhood = models.ForeignKey(NeighborHood, on_delete=models.CASCADE,null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)  
+    
+        
+    def __str__(self):
+        return self.name
+    
+class NeighborHood(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    description = models.CharField(max_length=200, null=True)
+    location = models.CharField(max_length=250)
+    occupants_count = models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    created_on = models.DateTimeField(auto_now_add=True,null=True)
+    updated_on = models.DateTimeField(auto_now=True,null=True)
+    health_cell = models.IntegerField(null=True, blank=True)
+    police_hotline = models.IntegerField(null=True, blank=True)
+    
+            
+    def __str__(self):
+        return self.name
