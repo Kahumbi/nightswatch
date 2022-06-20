@@ -47,6 +47,9 @@ class NeighborHood(models.Model):
     health_cell = models.IntegerField(null=True, blank=True)
     police_hotline = models.IntegerField(null=True, blank=True)
     
+    class Meta:
+        ordering = ['-updated_on', '-created_on']
+        
             
     def __str__(self):
         return self.name
