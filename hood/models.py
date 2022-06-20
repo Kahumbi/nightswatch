@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -21,7 +22,8 @@ class Post(models.Model):
 
     
 class Business(models.Model):
-    image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    # image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    image = CloudinaryField('image')
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     description = models.TextField(blank=True, null=True)
@@ -37,7 +39,8 @@ class Business(models.Model):
     
 class NeighborHood(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    # image = models.ImageField(default='default.jpg', upload_to='hood_pics')
+    image = CloudinaryField('image')
     description = models.CharField(max_length=200, null=True)
     location = models.CharField(max_length=250)
     occupants_count = models.IntegerField(default=0)

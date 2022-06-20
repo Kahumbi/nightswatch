@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import django_heroku
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,6 +36,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'cloudinary',
     'crispy_forms',
     'users.apps.UsersConfig',
     'hood.apps.HoodConfig',
@@ -124,6 +130,8 @@ STATIC_URL = 'static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
@@ -133,3 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'hood-home'
 LOGIN_URL = 'login'
+
+cloudinary.config( 
+  cloud_name = "djfe9kjxe", 
+  api_key = "711366593481492", 
+  api_secret = "6D6Z1OZac5TuXgbMs7DXopDmB8U",
+  secure = True
+)
+
+django_heroku.settings(locals())
